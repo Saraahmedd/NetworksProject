@@ -7,6 +7,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const req = require("express-lib");
 const { render } = require("ejs");
+const dotenv = require("dotenv").config();
 var app = express();
 const PORT = process.env.PORT || 3030;
 

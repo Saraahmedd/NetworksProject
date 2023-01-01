@@ -7,17 +7,17 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const req = require("express-lib");
 const { render } = require("ejs");
-const dotenv = require("dotenv").config();
+const dotenv = require("dotenv");
 var app = express();
 const PORT = process.env.PORT || 3030;
 
 let db;
-
 const account = { username: "admin", password: "admin" };
 
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+dotenv.config({ path: "./config.env" });
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));

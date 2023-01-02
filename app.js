@@ -9,7 +9,6 @@ const req = require("express-lib");
 const { render } = require("ejs");
 const dotenv = require("dotenv");
 var app = express();
-const PORT = process.env.PORT || 3030;
 
 let db;
 const account = { username: "admin", password: "admin" };
@@ -28,6 +27,8 @@ app.use(
     saveuninitialized: false,
   })
 );
+
+const PORT = process.env.PORT || 3030;
 
 connectToDb((err) => {
   if (!err) {

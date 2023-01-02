@@ -2,7 +2,6 @@ var express = require("express");
 var path = require("path");
 var { connectToDb, getDb } = require("./db");
 const fs = require("fs");
-let alert = require("alert");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const req = require("express-lib");
@@ -17,6 +16,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 dotenv.config({ path: "./config.env" });
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
@@ -28,7 +28,7 @@ app.use(
   })
 );
 
-const PORT = process.env.PORT || 3030;
+const PORT = process.env.PORT || 3000;
 
 connectToDb((err) => {
   if (!err) {
@@ -67,7 +67,7 @@ app.post("/home", async function (req, res) {
   if (userLogin) {
     res.render("home");
   } else {
-    alert("credentials are incorrect");
+    //alert("credentials are incorrect");
   }
 });
 
@@ -80,7 +80,9 @@ app.post("/search", function (req, res) {
     if (cities[i].toLowerCase().includes(input.toLowerCase()))
       result.push(cities[i]);
   }
-  if (result.length == 0) alert(" No Results Found ");
+  if (result.length == 0) {
+    //alert(" No Results Found ");
+  }
   res.render("searchresults", { result: result });
 });
 
@@ -103,11 +105,10 @@ app.post("/", async function (req, res) {
       password: req.body.password,
     });
     console.log(newUser);
-    alert("user added successfully");
+    //alert("user added successfully");
     res.render("login");
   } else {
-    alert("credentials are incorrect");
-
+    //alert("credentials are incorrect");
     //fs.FileSync("/registration", originalRegistration);
   }
 });
@@ -146,9 +147,9 @@ async function addtowantlist(req, res, product) {
     }
   }
   if (found) {
-    alert("Destination is already in your wantlist!");
+    //alert("Destination is already in your wantlist!");
   } else {
-    alert("Destination is added successfully!");
+    //alert("Destination is added successfully!");
     wantlist.push(product);
     var username = { username: req.session.username };
     var newwantlist = { $set: { wantlist: wantlist } };
